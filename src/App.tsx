@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/** @jsx jsx */
+import { jsx, Box, Flex, Heading, Text } from 'theme-ui';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Sidebar } from 'components/Sidebar';
+import { Bakery } from 'screens/Bakery';
+import { Store } from 'screens/Store';
+import { useAppContext } from 'context';
 
-function App() {
+export const App = () => {
+  const { state } = useAppContext();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <div
+        sx={{
+          maxWidth: '1100px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '1fr 4fr',
+          gridTemplateRows: 'auto auto',
+          gap: 2,
+          gridTemplateAreas: `"header header"
+                            "sidebar content"`,
+        }}
+      >
+        <Flex
+          sx={{
+            gridArea: 'header',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
+            p: 3,
+            border: 0,
+            borderRadius: 0,
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+          <Heading sx={{ color: 'primary', fontSize: 4 }}>Moon Bakery</Heading>
+          <Text>Money ${state.money}</Text>
+          <Text>
+            Loaves {state.loaves}/{state.maxLoaves}
+          </Text>
+        </Flex>
+        <Sidebar />
 
-export default App;
+        <Box sx={{ gridArea: 'content', borderRadius: 0, border: 0, p: 3 }}>
+          <Switch>
+            <Route exact path="/">
+              <Bakery />
+            </Route>
+            <Route exact path="/store">
+              <Store />
+            </Route>
+          </Switch>
+        </Box>
+      </div>
+    </Router>
+  );
+};
