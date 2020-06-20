@@ -5,6 +5,7 @@ import { Sidebar } from 'components/Sidebar';
 import { Bakery } from 'screens/Bakery';
 import { Store } from 'screens/Store';
 import { useAppContext } from 'context';
+import { formatMoney } from 'utils/formatMoney';
 
 export const App = () => {
   const { state } = useAppContext();
@@ -33,7 +34,7 @@ export const App = () => {
           }}
         >
           <Heading sx={{ color: 'primary', fontSize: 4 }}>Moon Bakery</Heading>
-          <Text>Money ${state.money}</Text>
+          <Text>Money {formatMoney(state.money)}</Text>
           <Text>
             Loaves {state.loaves}/{state.maxLoaves}
           </Text>

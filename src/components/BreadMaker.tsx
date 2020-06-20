@@ -10,15 +10,15 @@ export const BreadMaker = () => {
     <Flex
       sx={{
         flexDirection: 'column',
-        width: '12rem',
+        width: '25rem',
         justifyContent: 'center',
         alignItems: 'center',
       }}
     >
       <Bread
         sx={{
-          height: '10rem',
-          width: '10rem',
+          height: '15rem',
+          width: '15rem',
           '&:hover': {
             transform: `scale(1.02)`,
           },
@@ -26,9 +26,9 @@ export const BreadMaker = () => {
             transform: `scale(0.98)`,
           },
         }}
-        onClick={() => actions.addProgress(0.05)}
+        onClick={() => actions.addProgress(10)}
       />
-      <Progress value={state.progress} sx={{ height: '1rem' }} />
+      <Progress value={state.progress / 100} sx={{ height: '1rem' }} />
     </Flex>
   );
 };

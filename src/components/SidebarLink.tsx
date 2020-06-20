@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 export interface SidebarLinkProps {
   to: string;
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export const SidebarLink = ({ to, children }: SidebarLinkProps) => {
